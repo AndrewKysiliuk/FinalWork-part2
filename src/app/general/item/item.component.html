@@ -1,0 +1,39 @@
+<div class="item-card">
+  <mat-card class="custom-card">
+    <mat-card-title class="mat-card-title custom-title">
+      <mat-toolbar color="primary" class="custom-toolbar">
+        <mat-toolbar-row>
+          <div class="item-card__header">
+            <span>{{item.title | truncatePipe:[15]}}</span>
+            <div>
+              <mat-icon (click)="edit()">mode_edit</mat-icon>
+              <mat-icon color="warn" (click)="del()">delete_forever</mat-icon>
+            </div>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </mat-card-title>
+    <img class="item-card__img" *ngIf="item.img; else defaultImg" [src]="item.img" alt="photo">
+    <ng-template #defaultImg>
+      <img class="item-card__img" src="https://img.grouponcdn.com/deal/jaSuZT7oxkai5XziRxWW/V3-4272x2823/v1/c700x420.jpg" alt="" >
+    </ng-template>
+    <mat-card-content class="item-card__description">
+      <p>
+        {{item.description | truncatePipe:[100]}}
+      </p>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-footer class="custom-footer">
+      <div class="item-card__footer">
+        <div>
+          <mat-icon>face</mat-icon>
+          <span>user name</span>
+        </div>
+        <div>
+          <mat-icon>date_range</mat-icon>
+          <span>{{item.date}}</span>
+        </div>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>

@@ -1,0 +1,33 @@
+<div class="edit-dialog">
+  <div class="img">
+    <img *ngIf="imgUrl; else defaultImg" [src]="imgUrl" alt="img" (click)="editProfile()">
+    <ng-template #defaultImg>
+      <img [src]="defaultAvatar" alt="img">
+    </ng-template>
+  </div>
+  <form class="user-form" #form = 'ngForm'>
+      <mat-form-field>
+        <input matInput placeholder="Ім'я" type="text" [(ngModel)]="userName" #name="ngModel" name="name" required>
+        <mat-error *ngIf="name.invalid">{{'Поле імені неможе бути порожнім'}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" [(ngModel)]="user.email" name="email" disabled required>
+      </mat-form-field>
+      <mat-form-field>
+        <input #numb maxlength="9" matInput placeholder="Номер телефону" [(ngModel)]="userPhone" name="number"
+               #phone='ngModel' pattern="[0-9]{9}" required>
+        <mat-error *ngIf="phone.invalid">{{'Невірно введний номер телефону'}}</mat-error>
+        <mat-hint align="end">{{numb.value?.length || 0}}/9</mat-hint>
+        <span matPrefix>(+380)&nbsp;</span>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="URL аватара" type="text" [(ngModel)]="imgUrl" name="url"
+               #url='ngModel' pattern="https?://.*" required>
+        <mat-error *ngIf="url.invalid">{{'Неправильний URL картинки'}}</mat-error>
+      </mat-form-field>
+    </form>
+</div>
+<div class="button-dialog">
+  <button [disabled]="form.invalid" mat-raised-button color="primary" (click)="save()">Зберегти</button>
+  <button mat-raised-button color="warn" (click)="close()">Скасувати</button>
+</div>

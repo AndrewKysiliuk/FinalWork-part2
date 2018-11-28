@@ -1,0 +1,26 @@
+<div class="auth">
+  <form [formGroup]="form" #authForm = 'ngForm'>
+    <mat-card class="box">
+      <div class="box-header">
+        <button mat-fab color="warn"><mat-icon>exit_to_app</mat-icon></button>
+        <a mat-button routerLink="/registration" >Не маєте облікового запису? Зареєструйтеся зараз!</a>
+      </div>
+      <mat-card-content class="box-content">
+        <mat-card class="box-content__card">
+          <span>Авторизація</span>
+          <mat-form-field>
+            <input matInput placeholder="Email..." type="email" formControlName="email" name="email" required>
+            <div *ngIf="logError" class="authError">{{'Користувач з таким E-mail не зареєстрований'}}</div>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage('mail')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password..." type="password" formControlName="pass" name="pass"  required>
+            <div *ngIf="passError" class="authError">{{'Невірно введений пароль'}}</div>
+            <mat-error *ngIf="pass.invalid">{{getErrorMessage('pass')}}</mat-error>
+          </mat-form-field>
+        </mat-card>
+        <button [disabled]="authForm.invalid" mat-raised-button color="primary" type="submit" (click)="authorization()">Увійти</button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

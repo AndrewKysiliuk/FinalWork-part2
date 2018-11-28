@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="header_app">
+    <div class="user">
+      <img class="user__photo" *ngIf="user.img; else defaultImg" [src]="user.img" alt="img" (click)="editProfile()">
+      <ng-template #defaultImg>
+        <img class="user__photo" [src]="defaultAvatar" alt="img">
+      </ng-template>
+      <span class="user__name" (click)="editProfile()">{{user.name}}</span>
+    </div>
+    {{currentDate | date : 'EE dd HH:mm:ss':'':'uk'}}
+    <button class="user__log" mat-raised-button color="warn" (click)="logOut()">
+      Log Out <mat-icon class="example-icon" >exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

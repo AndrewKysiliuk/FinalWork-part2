@@ -1,0 +1,36 @@
+<div class="auth">
+  <form #regForm = 'ngForm' [formGroup]="form" >
+    <mat-card class="box">
+      <div class="box-header">
+        <button mat-fab color="warn" [disabled]="regForm.invalid"><mat-icon>person_add</mat-icon></button>
+        <a mat-button routerLink="/authorization">Вже є аккаунт? Увійти!</a>
+      </div>
+      <mat-card-content class="box-content">
+        <mat-card class="box-content__card">
+          <span>Реєстрація</span>
+          <mat-form-field>
+            <input matInput placeholder="Ім'я" type="text" formControlName="name"  name="name" required>
+            <mat-error *ngIf="name.invalid">{{getErrorMessage('name')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email..." type="email" formControlName="email" name="email"  required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage('mail')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input #numb maxlength="9" matInput placeholder="Номер телефону" formControlName="phone" name="number" required>
+            <mat-error *ngIf="phone.invalid">{{getErrorMessage('phone')}}</mat-error>
+            <mat-hint align="end">{{numb.value?.length || 0}}/9</mat-hint>
+            <span matPrefix>(+380)&nbsp;</span>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Пароль" type="password" formControlName="password" name="pass" required>
+            <mat-error *ngIf="password.invalid">{{getErrorMessage('pass')}}</mat-error>
+          </mat-form-field>
+        </mat-card>
+        <button [disabled]="regForm.invalid" mat-raised-button color="primary" type="submit" (click)="registration()">Зареєструватися</button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+
+
