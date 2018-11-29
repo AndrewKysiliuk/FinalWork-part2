@@ -9,7 +9,6 @@ import {HttpClientService} from '../Services/HttpClientService';
 
 export class GeneralComponent implements OnInit {
   category: Category[]  = [];
-  home;
   constructor(private http: HttpClientService) {}
 
   ngOnInit() {
