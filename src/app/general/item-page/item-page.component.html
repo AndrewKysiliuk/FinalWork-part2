@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="container">
+  <div class="item-title">
+    <div class="item-title__image">
+      <div class="image__item">
+        <img *ngIf="recipe.img; else defImg" [src]="recipe.img" alt="photo">
+        <ng-template #defImg>
+          <img [src]="defaultImg" alt="photo">
+        </ng-template>
+      </div>
+    </div>
+    <div class="item-title__info">
+      <form class="info__param" #titleForm = "ngForm">
+        <mat-form-field appearance="standard" class="custom-field">
+          <mat-label>Назва рецепту</mat-label>
+          <input matInput placeholder="Рецепт" [(ngModel)]="recipe.title" name="title" disabled>
+        </mat-form-field>
+      </form>
+      <div class="info__components">
+        <h1>Інгредієнти:</h1>
+        <form>
+          <div *ngFor ="let item of recipe.component; let i = index" class="form__input">
+            <div>
+              <mat-form-field appearance="standard">
+                <mat-label>Інгредієнт</mat-label>
+                <input matInput placeholder="Інгредієнт" [(ngModel)]="item.name" [name]='"name"+i' disabled>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="standard">
+                <mat-label>К-сть</mat-label>
+                <input type="number" matInput placeholder="К-сть" [(ngModel)]="item.count" [name]='"count"+i' disabled>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="standard">
+                <mat-label>Од. Вим.</mat-label>
+                <input type="text" matInput placeholder="Од. Вим." [(ngModel)]="item.type" [name]='"type"+i' disabled>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="item-content">
+    <h1>Спосіб приготування:</h1>
+    <form class="content__form">
+      <div *ngFor ="let item of recipe.prepare; index as i" class="form__data">
+        <div>
+          <img *ngIf="item.img; else defImg" [src]="item.img" alt="photo">
+          <ng-template #defImg>
+            <img [src]="defaultImg" alt="photo">
+          </ng-template>
+        </div>
+        <div>
+          <mat-form-field>
+            <textarea matInput placeholder="Приготування:" [(ngModel)]="item.info" [name]='"textArea"+i' disabled></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="description">
+      <form class="description__text">
+        <mat-form-field>
+          <textarea matInput placeholder="Опис страви:" [(ngModel)]="recipe.description" name="description" disabled></textarea>
+        </mat-form-field>
+      </form>
+      <div class="description__button">
+        <button mat-raised-button color="primary"
+                (click)="goToEdit()">
+          Редагувати
+        </button>
+        <button mat-raised-button color="warn" (click)="goBack()">Назад</button>
+      </div>
+    </div>
+  </div>
+</div>

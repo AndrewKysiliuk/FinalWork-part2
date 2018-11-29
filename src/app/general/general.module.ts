@@ -7,7 +7,9 @@ import { GeneralComponent } from './general.component';
 import { ShareModule } from '../share/share.module';
 import { ItemListComponent } from './item-list/item-list.component';
 import { HeaderComponent } from '../header/header.component';
-import { GeneralRoutingModule } from '../routers/general-routing.module';
+import { GeneralPageRoutingModule } from '../routers/general-page-routing.module';
+import { DelItemComponent } from './item-list/del-item/del-item.component';
+import { AddPhotoComponent } from './item-create/add-photo/add-photo.component';
 
 
 @NgModule({
@@ -18,18 +20,23 @@ import { GeneralRoutingModule } from '../routers/general-routing.module';
     ItemPageComponent,
     GeneralComponent,
     ItemListComponent,
+    DelItemComponent,
+    AddPhotoComponent,
   ],
   imports: [
     CommonModule,
     ShareModule,
-    GeneralRoutingModule
+    GeneralPageRoutingModule
   ],
+  entryComponents: [DelItemComponent, AddPhotoComponent],
   exports: [
     ItemComponent,
     ItemCreateComponent,
     ItemPageComponent,
     ItemListComponent,
     GeneralComponent,
+    DelItemComponent,
+    AddPhotoComponent,
   ]
 })
 export class GeneralModule { }

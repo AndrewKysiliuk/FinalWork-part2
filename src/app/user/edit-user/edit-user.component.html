@@ -1,6 +1,6 @@
 <div class="edit-dialog">
   <div class="img">
-    <img *ngIf="imgUrl; else defaultImg" [src]="imgUrl" alt="img" (click)="editProfile()">
+    <img *ngIf="imgUrl; else defaultImg" [src]="imgUrl" alt="img">
     <ng-template #defaultImg>
       <img [src]="defaultAvatar" alt="img">
     </ng-template>

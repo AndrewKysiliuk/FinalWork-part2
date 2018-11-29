@@ -8,11 +8,18 @@ import {HomeGuard} from '../Guards/home.guard';
 
 const child: Routes = [
   {
-    path: 'home/:category/:type', // create
+    path: 'home/:category/:id',
+    canActivate: [HomeGuard],
+    component: ItemPageComponent
+  },
+  {
+    path: 'home/:category/:type/new', // create
+    canActivate: [HomeGuard],
     component: ItemCreateComponent
   },
   {
     path: 'home/:category/:id/:type', // edit
+    canActivate: [HomeGuard],
     component: ItemCreateComponent
   },
   {
@@ -23,12 +30,8 @@ const child: Routes = [
       {
         path: ':category',
         component: ItemListComponent
-      },
-      {
-        path: ':category/:id',
-        component: ItemPageComponent
-      },
-    ]
+      }
+      ]
   }
 ];
 
@@ -36,4 +39,4 @@ const child: Routes = [
   imports: [RouterModule.forChild(child)],
   exports: [RouterModule]
 })
-export class GeneralRoutingModule { }
+export class GeneralPageRoutingModule { }

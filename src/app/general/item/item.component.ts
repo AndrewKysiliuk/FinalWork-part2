@@ -12,7 +12,7 @@ export class ItemComponent implements OnInit {
   @Input() item: Recipe;
   @Output() delId = new EventEmitter<number>();
   category;
-
+  defaultImg = '../../../assets/default_img.svg';
   constructor(private ar: ActivatedRoute,
               private router: Router,
               ) { }
@@ -23,6 +23,10 @@ export class ItemComponent implements OnInit {
 
   del() {
     this.delId.emit(this.item.id);
+  }
+
+  show() {
+    this.router.navigateByUrl(`/home/${this.category}/${this.item.id}`);
   }
 
   ngOnInit() {

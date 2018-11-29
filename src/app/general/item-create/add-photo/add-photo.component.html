@@ -1,0 +1,21 @@
+<div class="add-photo">
+  <div class="edit-dialog">
+    <div class="img">
+      <img *ngIf="customImg; else defaultImg" [src]="customImg" alt="img">
+      <ng-template #defaultImg>
+        <img [src]="defaultPhoto" alt="img">
+      </ng-template>
+    </div>
+    <form class="user-form" #form = 'ngForm'>
+      <mat-form-field>
+        <input matInput placeholder="URL картинки" type="text" [(ngModel)]="customImg" name="url"
+               #url='ngModel' pattern="https?://.*" required>
+        <mat-error *ngIf="url.invalid">{{'Неправильний URL картинки'}}</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="button-dialog">
+    <button [disabled]="form.invalid" mat-raised-button color="primary" (click)="save()">Зберегти</button>
+    <button mat-raised-button color="warn" (click)="close()">Скасувати</button>
+  </div>
+</div>

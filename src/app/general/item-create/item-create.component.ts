@@ -6,7 +6,8 @@ import {Recipe} from '../../classes/recipe';
 import {HttpClientService} from '../../Services/HttpClientService';
 import {Category} from '../general.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {AddPhotoComponent} from './add-photo/add-photo.component';
 
 @Component({
   selector: 'app-item-create',
@@ -30,7 +31,29 @@ export class ItemCreateComponent implements OnInit {
   constructor(private http: HttpClientService,
               private router: Router,
               private ar: ActivatedRoute,
-              public snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) {
+  }
+
+  openAddDialog(component, index: number = null) {
+    switch (component) {
+      case 'recipe': {
+        this.dialog.open(AddPhotoComponent, {
+          width: '550px',
+          height: '350px',
+          data: {recipe: this.recipe}
+        });
+        break;
+      }
+      case 'item': {
+        this.dialog.open(AddPhotoComponent, {
+          width: '550px',
+          height: '350px',
+          data: {recipe: this.recipe.prepare[index]}
+        });
+        break;
+      }
+    }
   }
 
   getErrorMessage(message: string, type: string = '') {
@@ -107,11 +130,11 @@ export class ItemCreateComponent implements OnInit {
     switch (this.pathType) {
       case 'create': {
         this.http.newRecord(this.itemCategory, this.recipe).subscribe(
-          ok => {
+          () => {
             this.router.navigate([`/home/${this.itemCategory}`]);
             this.snackBar.open('Запис успішно додано', null, {duration: 2000});
           },
-          error => {
+          () => {
             alert('Помилка під-час додавання рецепту');
             this.router.navigateByUrl(`/home/${this.itemCategory}`);
           }
@@ -120,11 +143,11 @@ export class ItemCreateComponent implements OnInit {
       }
       case 'edit': {
         this.http.update(this.itemCategory, this.recipe.id, this.recipe).subscribe(
-          ok => {
+          () => {
             this.router.navigate([`/home/${this.itemCategory}`]);
             this.snackBar.open('Запис успішно редаговано', null, {duration: 2000});
           },
-          error => {
+          () => {
             alert('Помилка під-час додавання рецепту');
             this.router.navigateByUrl(`/home/${this.itemCategory}`);
           }
@@ -141,7 +164,6 @@ export class ItemCreateComponent implements OnInit {
   createPage() {
     this.recipe.prepare.push(new Prepare());
     this.recipe.component.push(new Components());
-    this.recipe.img = this.defaultImg;
     this.addFormControl(this.recipe.component.length - 1);
   }
 
@@ -153,7 +175,8 @@ export class ItemCreateComponent implements OnInit {
         this.form.get(`name${index}`).setValue(item.name);
         this.form.get(`count${index}`).setValue(item.count);
         this.form.get(`type${index}`).setValue(item.type);
-      });
+      },
+        () => this.router.navigate(['/home/404']));
     });
   }
 
@@ -174,6 +197,9 @@ export class ItemCreateComponent implements OnInit {
           case 'edit': {
             this.editPage(path.id);
             break;
+          }
+          default : {
+            this.router.navigate(['404']);
           }
         }
       });

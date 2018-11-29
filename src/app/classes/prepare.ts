@@ -1,4 +1,4 @@
 export class Prepare {
-  constructor(public url: string = '',
+  constructor(public img: string = '',
               public info: string = '') {}
 }

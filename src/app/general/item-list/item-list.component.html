@@ -2,5 +2,5 @@
   <div class="new__items" (click)="createNew()">
     <mat-icon>add_circle_outline</mat-icon>
   </div>
-  <app-item [item]="item" *ngFor="let item of recipe" (delId)="del($event)"></app-item>
+  <app-item [item]="item" *ngFor="let item of recipe" (delId)="delDialog($event)"></app-item>
 </div>

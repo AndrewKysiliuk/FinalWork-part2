@@ -3,9 +3,12 @@
   <div class="item-title">
     <div class="item-title__image">
       <div class="image__item">
-        <img  [src]="recipe.img" alt="">
+        <img *ngIf="recipe.img; else defImg" [src]="recipe.img" alt="photo">
+        <ng-template #defImg>
+          <img [src]="defaultImg" alt="photo">
+        </ng-template>
       </div>
-      <button mat-raised-button color="primary">Додати фото</button>
+      <button mat-raised-button color="primary" (click)="openAddDialog('recipe')">Додати фото</button>
     </div>
     <div class="item-title__info">
       <form class="info__param" #titleForm = "ngForm">
@@ -57,8 +60,11 @@
     <h1>Спосіб приготування:</h1>
     <form class="content__form" #prepareForm = "ngForm">
       <div *ngFor ="let item of recipe.prepare; index as i" class="form__data">
-        <div>
-          <img [src]="defaultImg" alt="photo">
+        <div (click)="openAddDialog('item', i)">
+          <img *ngIf="item.img; else defImg" [src]="item.img" alt="photo">
+          <ng-template #defImg>
+            <img [src]="defaultImg" alt="photo">
+          </ng-template>
         </div>
         <div>
           <mat-form-field>

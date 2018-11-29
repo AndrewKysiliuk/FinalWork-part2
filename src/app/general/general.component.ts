@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClientService} from '../Services/HttpClientService';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-general',
@@ -10,19 +9,12 @@ import {Router} from '@angular/router';
 
 export class GeneralComponent implements OnInit {
   category: Category[]  = [];
-
-  constructor(private http: HttpClientService,
-              private router: Router) {}
-
-  addCategory(name: string) {
-    this.category.push({title: name, category: 'some'});
-  }
-
+  home;
+  constructor(private http: HttpClientService) {}
 
   ngOnInit() {
     this.http.httpGet().subscribe((data: Category[]) => {
       this.category = data;
-      // this.router.navigate([`/home/${this.category[0].category}`]);
     });
   }
 }
