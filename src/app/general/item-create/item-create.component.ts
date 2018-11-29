@@ -176,7 +176,7 @@ export class ItemCreateComponent implements OnInit {
         this.form.get(`count${index}`).setValue(item.count);
         this.form.get(`type${index}`).setValue(item.type);
       },
-        () => this.router.navigate(['/home/404']));
+        () => this.router.navigate(['/home/this/page/not/found']));
     });
   }
 
@@ -185,7 +185,7 @@ export class ItemCreateComponent implements OnInit {
       this.category = data;
       this.ar.params.subscribe(path => {
         if (!this.category.find(item => item.category === path.category)) {
-          this.router.navigate(['404']);
+          this.router.navigate(['home/this/page/not/found']);
         }
         this.itemCategory = path.category;
         this.pathType = path.type;
@@ -199,7 +199,7 @@ export class ItemCreateComponent implements OnInit {
             break;
           }
           default : {
-            this.router.navigate(['404']);
+            this.router.navigate(['home/this/page/not/found']);
           }
         }
       });

@@ -5,6 +5,7 @@ import { ItemCreateComponent} from '../general/item-create/item-create.component
 import { ItemPageComponent} from '../general/item-page/item-page.component';
 import { GeneralComponent} from '../general/general.component';
 import {HomeGuard} from '../Guards/home.guard';
+import {NotFoundComponent} from '../general/not-found/not-found.component';
 
 const child: Routes = [
   {
@@ -30,6 +31,10 @@ const child: Routes = [
       {
         path: ':category',
         component: ItemListComponent
+      },
+      {
+        path: 'this/page/not/found',
+        component: NotFoundComponent
       }
       ]
   }

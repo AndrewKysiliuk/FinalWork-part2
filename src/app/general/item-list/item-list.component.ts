@@ -44,7 +44,7 @@ export class ItemListComponent implements OnInit {
           this.snackBar.open('Запис успішно видалено', null, {horizontalPosition: 'center', duration: 2000});
           this.http.httpGet(this.category).subscribe((data: Recipe[]) => this.recipe = data);
         },
-        err => this.router.navigate(['404']));
+        err => this.router.navigateByUrl('home/this/page/not/found'));
     }
     this.delFlag.delete = false;
   }
@@ -56,7 +56,7 @@ export class ItemListComponent implements OnInit {
         (response: Recipe[]) => this.recipe = response,
         error => {
           console.log(error);
-          this.router.navigate(['404']);
+          this.router.navigateByUrl('home/this/page/not/found');
         }
       );
     });

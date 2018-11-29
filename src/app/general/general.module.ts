@@ -10,6 +10,7 @@ import { HeaderComponent } from '../header/header.component';
 import { GeneralPageRoutingModule } from '../routers/general-page-routing.module';
 import { DelItemComponent } from './item-list/del-item/del-item.component';
 import { AddPhotoComponent } from './item-create/add-photo/add-photo.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AddPhotoComponent } from './item-create/add-photo/add-photo.component';
     ItemListComponent,
     DelItemComponent,
     AddPhotoComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

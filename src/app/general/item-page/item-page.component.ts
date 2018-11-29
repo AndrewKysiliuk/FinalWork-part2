@@ -32,7 +32,7 @@ export class ItemPageComponent implements OnInit {
       this.id = data.id;
       this.category = data.category;
       this.service.httpGet(this.category, this.id).subscribe( (recipe: Recipe) => this.recipe = recipe,
-        err => this.router.navigate(['404']));
+        err => this.router.navigateByUrl('home/this/page/not/found'));
     });
   }
 
