@@ -1,5 +1,6 @@
 <app-header></app-header>
 <div class="container">
+  <a class="nav" routerLink="/home"><mat-icon>home</mat-icon><span> На головну</span></a>
   <div class="item-title">
     <div class="item-title__image">
       <div class="image__item">
@@ -38,7 +39,7 @@
             </div>
             <div>
               <mat-form-field appearance="standard">
-                <mat-select placeholder="Од. Вим."  name="food" [formControlName]="'type'+i" required>
+                <mat-select placeholder="Од. Вим." [formControlName]="'type'+i" required>
                   <mat-option *ngFor="let food of types" [value]="food">
                     {{food}}
                   </mat-option>
